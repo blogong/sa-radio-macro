@@ -5,9 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class SaRadioMacroServerApplicationTests {
-
-    @Test
-    fun contextLoads() {
-    }
-
+     @Test
+     fun contextLoads() {
+     }
 }

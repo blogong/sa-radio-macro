@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SaRadioMacroServerApplication
 
 fun main(args: Array<String>) {
-    runApplication<SaRadioMacroServerApplication>(*args)
+     runApplication<SaRadioMacroServerApplication>(*args)
 }
