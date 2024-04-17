@@ -18,6 +18,11 @@ spring:
     username: local
     password: secret
 
+  config:
+    import:
+      - classpath:secret.yml
+      - classpath:client.yml
+
 ---
 
 spring:

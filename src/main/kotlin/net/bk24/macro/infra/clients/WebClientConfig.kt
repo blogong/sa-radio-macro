@@ -11,12 +11,22 @@ import reactor.netty.resources.ConnectionProvider
 import java.time.Duration
 
 @Configuration
-class WebClientConfig {
+class WebClientConfig(private val headerProperties: HttpHeaderProperties) {
      @Bean
      fun webClient(): WebClient {
-          return WebClient.builder().baseUrl("https://sa.radio.com")
+          return WebClient.builder()
+               .baseUrl("https://sa.radio.com")
+               .defaultHeader("Accept", headerProperties.accept)
+               .defaultHeader("Connection", headerProperties.connection)
+               .defaultHeader("Accept-Encoding", headerProperties.acceptEncoding)
+               .defaultHeader("Content-Type", headerProperties.contentType)
+               .defaultHeader("User-Agent", headerProperties.userAgent)
+               .defaultHeader("Host", headerProperties.host)
+               .defaultHeader("Accept-Language", headerProperties.acceptLanguage)
+               .defaultHeader("Cookie", headerProperties.cookie)
                .codecs { configurer -> configurer.defaultCodecs() }
-               .clientConnector(ReactorClientHttpConnector(httpClient())).build()
+               .clientConnector(ReactorClientHttpConnector(httpClient()))
+               .build()
      }
 
      @Bean
