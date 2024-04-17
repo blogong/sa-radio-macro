@@ -2,6 +2,21 @@ spring:
   profiles:
     active: local
 
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    open-in-view: off
+    database-platform: org.hibernate.dialect.MySQLDialect
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/macro?serverTimezone=UTC
+    username: local
+    password: secret
 
 ---
 
