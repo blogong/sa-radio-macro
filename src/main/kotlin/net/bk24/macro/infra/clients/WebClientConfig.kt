@@ -11,19 +11,24 @@ import reactor.netty.resources.ConnectionProvider
 import java.time.Duration
 
 @Configuration
-class WebClientConfig(private val headerProperties: HttpHeaderProperties) {
+class WebClientConfig {
+     @Bean
+     fun httpHeaderProperties(): HttpHeaderProperties {
+          return HttpHeaderProperties()
+     }
+
      @Bean
      fun webClient(): WebClient {
           return WebClient.builder()
                .baseUrl("https://sa.radio.com")
-               .defaultHeader("Accept", headerProperties.accept)
-               .defaultHeader("Connection", headerProperties.connection)
-               .defaultHeader("Accept-Encoding", headerProperties.acceptEncoding)
-               .defaultHeader("Content-Type", headerProperties.contentType)
-               .defaultHeader("User-Agent", headerProperties.userAgent)
-               .defaultHeader("Host", headerProperties.host)
-               .defaultHeader("Accept-Language", headerProperties.acceptLanguage)
-               .defaultHeader("Cookie", headerProperties.cookie)
+               .defaultHeader("Accept", HttpHeaderProperties().accept)
+               .defaultHeader("Connection", HttpHeaderProperties().connection)
+               .defaultHeader("Accept-Encoding", HttpHeaderProperties().acceptEncoding)
+               .defaultHeader("Content-Type", HttpHeaderProperties().contentType)
+               .defaultHeader("User-Agent", HttpHeaderProperties().userAgent)
+               .defaultHeader("Host", HttpHeaderProperties().host)
+               .defaultHeader("Accept-Language", HttpHeaderProperties().acceptLanguage)
+               .defaultHeader("Cookie", HttpHeaderProperties().cookie)
                .codecs { configurer -> configurer.defaultCodecs() }
                .clientConnector(ReactorClientHttpConnector(httpClient()))
                .build()
