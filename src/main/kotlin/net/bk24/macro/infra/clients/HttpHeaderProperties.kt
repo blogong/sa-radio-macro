@@ -12,4 +12,5 @@ class HttpHeaderProperties(
      var host: String = "",
      var acceptLanguage: String = "",
      var cookie: String = "",
+     var contentLength: String = "",
 )

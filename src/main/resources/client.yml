@@ -1,0 +1,11 @@
+http:
+  headers:
+    accept: "*/*"
+    connection: "keep-alive"
+    acceptEncoding: "gzip, deflate, br"
+    contentType: "application/x-www-form-urlencoded"
+    userAgent: "SuddenRadio/4.2.4 (iPhone; iOS 16.0; Scale/3.00)"
+    host: "saradioapi.nexon.com"
+    acceptLanguage: "ko-KR;q=1, en-KR;q=0.9"
+    cookie: "ASP.NET_SessionId=bjttou3g1ohrwdnch3gbt0x0; _ga=GA1.2.848346599.1708339012; _gid=GA1.2.819194153.1712627178; PCID=17083390115485266802788"
+    contentLength: "124"

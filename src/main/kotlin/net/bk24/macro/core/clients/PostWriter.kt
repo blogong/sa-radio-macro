@@ -1,5 +1,5 @@
 package net.bk24.macro.core.clients
 
 interface PostWriter {
-     fun execute()
+     suspend fun write(log: String)
 }

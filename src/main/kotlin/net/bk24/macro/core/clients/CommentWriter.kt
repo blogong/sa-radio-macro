@@ -1,5 +1,8 @@
 package net.bk24.macro.core.clients
 
 interface CommentWriter {
-     fun execute()
+     suspend fun execute(
+          authCodes: List<String>,
+          concurrency: Int
+     )
 }

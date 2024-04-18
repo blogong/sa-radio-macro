@@ -8,6 +8,12 @@ plugins {
      kotlin("plugin.jpa") version "1.9.23"
 }
 
+noArg {
+     annotation("javax.persistence.Entity")
+     annotation("javax.persistence.MappedSuperclass")
+     annotation("javax.persistence.Embeddable")
+}
+
 group = "net.bk24"
 version = "0.0.1-SNAPSHOT"
 
@@ -22,19 +28,18 @@ repositories {
 dependencies {
      implementation("org.springframework.boot:spring-boot-starter-data-jpa")
      implementation("org.springframework.boot:spring-boot-starter-quartz")
-     implementation("org.springframework.boot:spring-boot-starter-security")
      implementation("org.springframework.boot:spring-boot-starter-validation")
      implementation("org.springframework.boot:spring-boot-starter-webflux")
      implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
      implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
      implementation("org.jetbrains.kotlin:kotlin-reflect")
      implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
      testImplementation("org.springframework.boot:spring-boot-starter-test")
      testImplementation("io.projectreactor:reactor-test")
-     testImplementation("org.springframework.security:spring-security-test")
      runtimeOnly("com.mysql:mysql-connector-j")
      testImplementation("com.tngtech.archunit:archunit:1.3.0")
+     runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.104.Final:osx-aarch_64")
+     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
 }
 
 tasks.withType<KotlinCompile> {

@@ -20,16 +20,8 @@ class WebClientConfig {
      @Bean
      fun webClient(): WebClient {
           return WebClient.builder()
-               .baseUrl("https://sa.radio.com")
-               .defaultHeader("Accept", HttpHeaderProperties().accept)
-               .defaultHeader("Connection", HttpHeaderProperties().connection)
-               .defaultHeader("Accept-Encoding", HttpHeaderProperties().acceptEncoding)
-               .defaultHeader("Content-Type", HttpHeaderProperties().contentType)
-               .defaultHeader("User-Agent", HttpHeaderProperties().userAgent)
-               .defaultHeader("Host", HttpHeaderProperties().host)
-               .defaultHeader("Accept-Language", HttpHeaderProperties().acceptLanguage)
-               .defaultHeader("Cookie", HttpHeaderProperties().cookie)
-               .codecs { configurer -> configurer.defaultCodecs() }
+               .baseUrl("https://saradioapi.nexon.com")
+               .codecs { configurer -> configurer.defaultCodecs().maxInMemorySize(-1) }
                .clientConnector(ReactorClientHttpConnector(httpClient()))
                .build()
      }
@@ -37,9 +29,9 @@ class WebClientConfig {
      @Bean
      fun httpClient(): HttpClient {
           return HttpClient.create().doOnConnected { conn ->
-               conn.addHandlerLast(ReadTimeoutHandler(10))
-               conn.addHandlerLast(WriteTimeoutHandler(10))
-          }.responseTimeout(Duration.ofSeconds(5L))
+               conn.addHandlerLast(ReadTimeoutHandler(-1))
+               conn.addHandlerLast(WriteTimeoutHandler(-1))
+          }.responseTimeout(Duration.ofSeconds(-1))
      }
 
      @Bean

@@ -4,32 +4,21 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         show_sql: true
         format_sql: true
     open-in-view: off
-    database-platform: org.hibernate.dialect.MySQLDialect
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/macro?serverTimezone=UTC
-    username: local
+    url: jdbc:mysql://ec2-15-165-119-94.ap-northeast-2.compute.amazonaws.com:3306/local?serverTimezone=UTC
+    username: root
     password: secret
 
   config:
     import:
       - classpath:client.yml
-
----
-
-spring:
-  profiles:
-    active: dev
-
----
-
-spring:
-  profiles:
-    active: live
+server:
+  port: 8080
