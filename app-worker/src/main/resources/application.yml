@@ -1,0 +1,67 @@
+server:
+  port: 8080
+
+spring:
+  r2dbc:
+    url: 'r2dbc:mysql://macro-db.cd6gc4wm6h7v.ap-northeast-2.rds.amazonaws.com:3306/thunder?serverTimezone=UTC'
+    username: 'admin'
+    password: 'secret1!'
+    pool:
+      enabled: true
+      initial-size: 10
+      max-acquire-time: 5s
+      max-create-connection-time: 5s
+      max-idle-time: 60m # max-wait-time 이랑 같이 챙겨 줘야 함.
+      max-life-time: 60m
+      max-size: 10
+
+  cloud:
+    aws:
+      credentials:
+        access-key: AKIAU6GD35V32XDH6KM5
+        secret-key: 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
+      region:
+        static: ap-northeast-2
+  config:
+    import: classpath:/client.yml
+
+    activate:
+      on-profile: test
+---
+server:
+  port: 8080
+
+sentry:
+  dsn: https://c2e609525e4e3aaaf91da8fc2e518c7b@o4507129311592448.ingest.us.sentry.io/4507129317425152
+  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
+  # We recommend adjusting this value in production.
+  traces-sample-rate: 0.1
+  enable-metrics: on
+  environment: live
+
+spring:
+  r2dbc:
+    url: 'r2dbc:mysql://macro-db.cd6gc4wm6h7v.ap-northeast-2.rds.amazonaws.com:3306/thunder?serverTimezone=UTC'
+    username: 'admin'
+    password: 'secret1!'
+    pool:
+      enabled: true
+      initial-size: 10
+      max-acquire-time: 5s
+      max-create-connection-time: 5s
+      max-idle-time: 60m # max-wait-time 이랑 같이 챙겨 줘야 함.
+      max-life-time: 60m
+      max-size: 10
+
+  cloud:
+    aws:
+      credentials:
+        access-key: AKIAU6GD35V32XDH6KM5
+        secret-key: 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
+      region:
+        static: ap-northeast-2
+  config:
+    import: classpath:/client.yml
+
+    activate:
+      on-profile: live
