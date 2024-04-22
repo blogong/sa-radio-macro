@@ -1,8 +1,9 @@
 rootProject.name = "sa-radio-macro"
 
 include(
-    "core",
-    "worker",
+    "app-core",
+    "app-worker",
+    "app-common",
 )
 
 pluginManagement {
