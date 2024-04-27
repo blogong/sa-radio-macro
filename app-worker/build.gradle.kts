@@ -1,6 +1,6 @@
 dependencyManagement {
     imports {
-        mavenBom("de.codecentric:spring-boot-admin-dependencies:3.2.3")
+        mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.3")
     }
 }
 tasks.getByName("bootJar") {
@@ -9,12 +9,6 @@ tasks.getByName("bootJar") {
 
 tasks.getByName("jar") {
     enabled = false
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
 }
 
 plugins {

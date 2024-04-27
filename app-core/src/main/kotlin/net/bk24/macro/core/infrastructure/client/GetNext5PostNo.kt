@@ -66,11 +66,3 @@ object GetNext5PostNo {
         }
     }
 }
-
-fun main() {
-    val postIds = listOf("1292229646", "1234567890", "9876543210", "5432167890", "0987654321")
-    val postNoLists = GetNext5PostNo.execute(postIds)
-    postNoLists.forEachIndexed { index, postNoList ->
-        println("Post ID: ${postIds[index]}, Post Numbers: $postNoList")
-    }
-}

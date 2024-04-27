@@ -1,7 +1,6 @@
-val springBootAdminVersion by extra("3.2.3")
 dependencyManagement {
     imports {
-        mavenBom("de.codecentric:spring-boot-admin-dependencies:$springBootAdminVersion")
+        mavenBom("de.codecentric:spring-boot-admin-dependencies:3.5.3")
     }
 }
 tasks.getByName("bootJar") {

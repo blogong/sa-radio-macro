@@ -1,6 +1,7 @@
 server:
   port: 8081 # 클라이언트 서버 포트
 
+spring:
   r2dbc:
     url: 'r2dbc:mysql://macro-db.cd6gc4wm6h7v.ap-northeast-2.rds.amazonaws.com:3306/thunder?serverTimezone=UTC'
     username: 'admin'
@@ -28,11 +29,24 @@ server:
   mvc:
     async:
       request-timeout: 999999
+
 ---
 server:
   port: 8080
 
+public:
+  ip: ${PUBLIC_IP}
+
 spring:
+  application:
+    name: thunder-macro-worker
+  boot:
+    admin:
+      client:
+        auto-registration: true
+        url: http://54.180.131.37:8082
+        instance:
+          service-url: http://${public.ip}:8080 # 이 서비스의 공개 접근 URL
   r2dbc:
     url: 'r2dbc:mysql://macro-db.cd6gc4wm6h7v.ap-northeast-2.rds.amazonaws.com:3306/thunder?serverTimezone=UTC'
     username: 'admin'
@@ -61,3 +75,12 @@ spring:
   mvc:
     async:
       request-timeout: 9999999999
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

@@ -10,7 +10,7 @@ HOSTS=(
 )
 
 # SSH 접속에 사용할 PEM 키 파일 위치
-PEM_KEY_PATH="~/Downloads/jun.pem"
+PEM_KEY_PATH="/Users/bread/Downloads/jun.pem"
 
 # Docker 컨테이너의 최근 20줄 로그를 보는 스크립트
 DOCKER_SCRIPT='
