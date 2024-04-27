@@ -16,31 +16,30 @@ class CommentProvider(
 ) {
     private val logger = LoggerFactory.getLogger("comment-provider")
 
-    data class PostWriter(
-        val snsId: String,
-        val postId: String,
-        val code: String,
-    )
-
     @Transactional(readOnly = true)
     fun execute() {
         val auth = authRepository.findAll()
-        val postWriters = auth.filter { it.postId?.isNotBlank() == true }
+        val postWriters = auth
+            .filter { it.postId?.isNotBlank() == true }
             .map { PostWriter(it.snsId!!, it.postId!!, it.code) }
 
         val ips = workerIpProps.ip
 
         for (ip in ips) {
             val index = ips.indexOf(ip)
-            val postNos = GetNext5PostNo.execute(postWriters.map { it.postId }).map { it.first() }.take(5)
-            sendRequestToWorker(ip, postWriters, postNos, index)
+            val postNos = GetNext5PostNo
+                .execute(postWriters.map { it.postId })
+                .map { it.first() }
+                .take(5)
+
+            Thread { sendRequestToWorker(ip, postWriters, postNos, index) }.start()
         }
     }
 
     private fun sendRequestToWorker(ip: String, postWriters: List<PostWriter>, postNos: List<Int>, index: Int) {
         logger.info("Sending request to $ip")
         val serverTodo = ServerTodo(
-            authCodes = authRepository.findActiveCodesByChunkSize(8, index),
+            authCodes = authRepository.findActiveCodesByChunkSize(9, index),
             snsIds = postWriters.map { it.snsId }.distinct(),
             postNos = postNos,
         )
@@ -49,5 +48,13 @@ class CommentProvider(
 
     private fun AuthRepository.findActiveCodesByChunkSize(chunkSize: Int, index: Int): List<String> {
         return findAll().filter { !it.isBlocked }.map { it.code }.chunked(chunkSize).getOrElse(index) { emptyList() }
+    }
+
+    companion object {
+        data class PostWriter(
+            val snsId: String,
+            val postId: String,
+            val code: String,
+        )
     }
 }

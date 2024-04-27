@@ -1,6 +1,6 @@
 package net.bk24.macro.core.application.timer
 
-import net.bk24.macro.core.application.FamousMaker
+import net.bk24.macro.common.Write
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 import java.util.Calendar
@@ -25,15 +25,15 @@ import java.util.TimeZone
 @Profile("live")
 @Component
 class RealTimeProvider : TimeProvider {
-    override fun isTimeToRun(currentTime: Date): FamousMaker.Type? {
+    override fun isTimeToRun(currentTime: Date): Write? {
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
         calendar.time = currentTime
 
         val currentMinute = calendar.get(Calendar.MINUTE)
 
         return when (currentMinute) {
-            29, 59 -> FamousMaker.Type.POST
-            30, 0 -> FamousMaker.Type.COMMENT
+            29, 59 -> Write.POST
+            0, 30 -> Write.COMMENT
             else -> return null
         }
     }

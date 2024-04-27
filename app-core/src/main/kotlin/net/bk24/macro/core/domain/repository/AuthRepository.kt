@@ -6,4 +6,5 @@ interface AuthRepository {
     fun findAll(): MutableList<Auth>
     fun findSnsIdNotNull(): List<Auth>
     fun save(auth: Auth)
+    fun findAllActiveCount(): Int
 }

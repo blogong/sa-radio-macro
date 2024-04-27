@@ -19,12 +19,13 @@ class TaskApi(
             // 한국 시간대로 현재 시각을 구함
             val now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
 
-            // 현재 분이 29분인지 확인
+            // 29분 실행
             if (now.minute == 29) {
-                // 29분일 때 실행할 코드
-//                    postProvider.execute()
-                Thread.sleep(30 * 1000) // 30분 후에 루프 시작
-                famousMaker.execute()
+                // 게시글 작성
+                postProvider.execute()
+                Thread.sleep(30 * 60 * 1000)
+                // 30분 후에 루프 시작
+                famousMaker.loopToExecute()
             }
             // 1분마다 체크하도록 60초 대기
             Thread.sleep(60000)

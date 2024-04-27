@@ -14,6 +14,11 @@ class AuthApi(
     fun auth(): List<AuthResponse> {
         return authService.findAll().map { saAuth ->
             saAuth.toResponse()
-        }
+        }.distinct()
+    }
+
+    @GetMapping("/api/auth/count")
+    fun activeAuthCount(): Int {
+        return authService.findAllActiveAuthCount()
     }
 }

@@ -19,4 +19,8 @@ class AuthRepositoryAdapter(
     override fun save(auth: Auth) {
         authJpaRepository.saveAndFlush(auth)
     }
+
+    override fun findAllActiveCount(): Int {
+        return authJpaRepository.findAll().count { !it.isBlocked }
+    }
 }

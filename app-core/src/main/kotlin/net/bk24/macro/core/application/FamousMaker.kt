@@ -1,5 +1,6 @@
 package net.bk24.macro.core.application
 
+import net.bk24.macro.common.Write
 import net.bk24.macro.core.application.timer.TimeProvider
 import net.bk24.macro.core.application.writer.CommentProvider
 import net.bk24.macro.core.application.writer.PostProvider
@@ -29,19 +30,13 @@ class FamousMaker(
     private val postProvider: PostProvider,
 ) {
 
-    enum class Type {
-        POST,
-        COMMENT,
-    }
-
-    fun execute() {
+    fun loopToExecute() {
         while (true) {
-            commentProvider.execute()
             val runType = timeProvider.isTimeToRun(Date()) ?: continue
 
             when (runType) {
-                Type.COMMENT -> commentProvider.execute()
-                Type.POST -> postProvider.execute()
+                Write.COMMENT -> commentProvider.execute()
+                Write.POST -> postProvider.execute()
             }
             Thread.sleep(5000)
         }
