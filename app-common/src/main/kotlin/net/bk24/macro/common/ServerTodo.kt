@@ -1,18 +1,22 @@
 package net.bk24.macro.common
 
-import java.util.UUID
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ServerTodo(
-    val id: UUID = UUID.randomUUID(),
     val writerId: String = "",
-    val authCodes: List<String> = emptyList(),
+    var authCodes: List<String> = emptyList(),
     val snsIds: List<String> = emptyList(),
     var postNos: List<Int> = emptyList(),
     val type: Type = Type.COMMENT,
-    val workerIp: String = "",
 ) {
+
     enum class Type {
         POST,
         COMMENT,
+    }
+
+    fun remix() {
+        this.authCodes = this.authCodes.shuffled()
     }
 }

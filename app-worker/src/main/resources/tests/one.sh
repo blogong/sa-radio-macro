@@ -1,61 +1,50 @@
 #!/bin/bash
 
-emoticons=(
-    "<emoticon>emoticon_img_red_03</emoticon>"
-    "<emoticon>emoticon_img_red_01</emoticon>"
-    "<emoticon>emoticon_img_red_04</emoticon>"
-    "<emoticon>emoticon_img_blue_03</emoticon>"
-    "<emoticon>emoticon_img_blue_05</emoticon>"
-    "<emoticon>emoticon_img_blue_06</emoticon>"
-    "<emoticon>emoticon_img_red_06</emoticon>"
-    "<emoticon>emoticon_img_red_02</emoticon>"
-    "<emoticon>emoticon_img_blue_01</emoticon>"
-    "<emoticon>emoticon_img_blue_02</emoticon>"
-    "<emoticon>emoticon_img_blue_04</emoticon>"
-    "<emoticon>emoticon_img_red_03</emoticon>"
-    "<emoticon>emoticon_img_red_01</emoticon>"
-    "<emoticon>emoticon_img_red_04</emoticon>"
+# auth_code 배열
+auth_codes=(
+    "7795221L"
+    "5T349ZCZ"
+    "8687U12O"
+    "9U61MK9N"
+    "447X77CY"
+    "35679RT8"
+    "297M673P"
+    "5E99868E"
+    "9718D892"
+    "38848Z3S"
+    "53369M3B"
+    "76878832"
+    "8797299N"
+    "34468J28"
+    "82345698"
+    "14RSTS9V"
+    "593978QV"
+    "8269PU9M"
+    "5611CUOH"
+    "38917ZHL"
+    "86716F72"
+    "5681H8MN"
+    "1479H68B"
+    "75352ZMZ"
+    "45718Z33"
+    "3351Z7VC"
+    "734869EO"
+    "3S8NY729"
+    "58582D19"
+    "2689MH7B"
+    "8631573H"
 )
 
-# 영어 문자열 생성 함수
-generate_random_english() {
-    local CHARS="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    local LENGTH=$((RANDOM % 6 + 10))  # 10에서 15 사이의 숫자 생성
-    local RESULT=""
+# 기본 cURL 설정
+url="https://api.example.com/endpoint"
+contentType="application/x-www-form-urlencoded"
 
-    for (( i=0; i<$LENGTH; i++ )); do
-        local INDEX=$((RANDOM % ${#CHARS}))
-        RESULT+=${CHARS:$INDEX:1}
-    done
-
-    echo "$RESULT"
-}
-
-# 배열의 모든 이미모티콘을 순차적으로 처리하면서 랜덤 텍스트 추가
-for emoticon in "${emoticons[@]}"
+# 각 auth_code에 대해 요청 실행
+for auth_code in "${auth_codes[@]}"
 do
-   # 랜덤 텍스트 생성
-   random_text=$(generate_random_english)
-
-   # 랜덤 텍스트와 이미모티콘 결합
-   content="${emoticon}_${random_text}"
-
-   curl -k -X POST \
-     -H "Accept: */*" \
-     -H "Connection: keep-alive" \
-     -H "Accept-Encoding: gzip, deflate, br" \
-     -H "Cookie: ASP.NET_SessionId=bjttou3g1ohrwdnch3gbt0x0; _ga=GA1.2.848346599.1708339012; _gid=GA1.2.819194153.1712627178; PCID=17083390115485266802788" \
-     -H "Content-Type: application/x-www-form-urlencoded" \
-     -H "User-Agent: SuddenRadio/4.2.4 (iPhone; iOS 16.0; Scale/3.00)" \
-     -H "Host: saradioapi.nexon.com" \
-     -H "Accept-Language: ko-KR;q=1, en-KR;q=0.9" \
-     -d "auth_code=331791BJ&content=$content&post_no=54&season_level_join_flag=Y&season_level_no=28&sns_user_sn=233123&user_level=47" \
-     "https://saradioapi.nexon.com/Sns/PostCommentCreate.aspx"
-
-  # 6초에서 8초 사이의 랜덤 대기 시간 생성
-  wait_time=$(awk -v min=6 -v max=8 'BEGIN{srand(); print min + rand() * (max - min)}')
-
-  # 랜덤 대기 시간 출력 및 sleep
-  echo "Waiting for $wait_time seconds..."
-  sleep $wait_time
+    curl -X POST "$url" \
+        -H "Content-Type: $contentType" \
+        -d "auth_code=$auth_code&other_param=value" \
+        -o "output_${auth_code}.txt"
+    echo "Request with auth_code $auth_code completed."
 done

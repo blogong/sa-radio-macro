@@ -1,3 +1,9 @@
+val springBootAdminVersion by extra("3.2.3")
+dependencyManagement {
+    imports {
+        mavenBom("de.codecentric:spring-boot-admin-dependencies:$springBootAdminVersion")
+    }
+}
 tasks.getByName("bootJar") {
     enabled = true
 }
@@ -16,7 +22,6 @@ dependencies {
     implementation(project(":app-common"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("de.codecentric:spring-boot-admin-starter-server")
     runtimeOnly("com.mysql:mysql-connector-j")
-    implementation("com.discord4j:discord4j-core:3.2.6")
-    implementation("com.amazonaws:aws-java-sdk-sns:1.12.22")
 }

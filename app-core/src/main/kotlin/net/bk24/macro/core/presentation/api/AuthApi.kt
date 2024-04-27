@@ -1,6 +1,6 @@
 package net.bk24.macro.core.presentation.api
 
-import net.bk24.macro.core.application.AuthService
+import net.bk24.macro.core.application.auth.AuthService
 import net.bk24.macro.core.presentation.api.dto.AuthResponse
 import net.bk24.macro.core.presentation.api.dto.AuthResponse.Companion.toResponse
 import org.springframework.web.bind.annotation.GetMapping

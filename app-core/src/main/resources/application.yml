@@ -1,5 +1,4 @@
-sentry:
-  enable-metrics: true
+
 
 spring:
   cloud:
@@ -29,4 +28,4 @@ spring:
     import:
       - classpath:client.yml
 server:
-  port: 8081
+  port: 8082

@@ -51,9 +51,15 @@ object GetNext5PostNo {
 
             val postNoList = mutableListOf<Int>()
             if (dataset.isArray) {
+                var postNo = 0
                 for (i in 0 until dataset.size()) {
-                    val postNo = dataset[i].path("post_no").asInt()
-                    postNoList.add(postNo)
+                    if (i == 0) {
+                        postNo = dataset[i].path("post_no").asInt()
+                        postNoList.add(postNo)
+                    } else {
+                        postNo += 1
+                        postNoList.add(postNo)
+                    }
                 }
             }
             postNoList

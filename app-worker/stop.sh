@@ -11,8 +11,7 @@ PEM_KEY_PATH="~/Downloads/jun.pem"
 
 # Docker 컨테이너 중지 및 제거 스크립트
 STOP_SCRIPT='
-sudo docker stop radio-server
-sudo docker remove radio-server
+docker system prune
 '
 
 

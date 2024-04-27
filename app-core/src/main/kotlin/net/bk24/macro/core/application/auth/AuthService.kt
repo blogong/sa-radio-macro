@@ -1,4 +1,4 @@
-package net.bk24.macro.core.application
+package net.bk24.macro.core.application.auth
 
 import net.bk24.macro.core.domain.domain.Auth
 import net.bk24.macro.core.domain.repository.AuthRepository
