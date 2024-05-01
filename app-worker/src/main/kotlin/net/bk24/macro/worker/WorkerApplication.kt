@@ -1,6 +1,6 @@
 package net.bk24.macro.worker
 
-import net.bk24.macro.worker.infrastructure.retrofit.GetLocalIpAddress
+import net.bk24.macro.worker.infrastructure.client.GetLocalIpAddress
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 

@@ -7,7 +7,7 @@ cd ..
 SERVERS=("3.36.86.236" "43.201.150.174")
 
 # PEM 키 파일 위치
-PEM_KEY="~/Downloads/jun.pem"
+PEM_KEY_PATH="/Users/bread/Downloads/jun.pem"
 
 
 # Docker 설치 및 실행 스크립트
